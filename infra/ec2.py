@@ -25,13 +25,13 @@ class EC2(Construct):
 
         self.instances = {}
         for instance in ec2_config:
-            bastion_sg = ec2.SecurityGroup(
+            instance_sg = ec2.SecurityGroup(
                 self,
                 f"{stack_name}-{instance["name"]}-sg",
                 vpc=vpcs[instance["vpc"]],
                 security_group_name=f"{stack_name}-{instance["name"]}-sg"
             )
-            bastion_sg.add_ingress_rule(
+            instance_sg.add_ingress_rule(
                 ec2.Peer.any_ipv4(),
                 ec2.Port.all_traffic(),
                 "Allow all traffic"
@@ -55,7 +55,7 @@ class EC2(Construct):
                 vpc=vpcs[instance["vpc"]],
                 instance_name=f"{stack_name}-{instance["name"]}",
                 role=ec2_role,
-                security_group=bastion_sg,
+                security_group=instance_sg,
                 vpc_subnets=ec2.SubnetSelection(subnet_type=getattr(ec2.SubnetType, instance["subnet-type"])),
                 user_data=userdata
             )
