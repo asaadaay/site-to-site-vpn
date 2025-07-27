@@ -6,7 +6,7 @@ A secure site-to-site VPN implementation for connecting cloud and on-premises ne
 
 This project creates a site-to-site VPN connection between:
 
-- **Cloud Network**: AWS VPC with resources
+- **Cloud Network**: Standard VPC setup with an EC2 instance to demonstrate connectivity.
 - **On-Premises Network**: Simulated on-premises environment using a separate VPC with StrongSwan running on an EC2 instance to serve as a customer gateway device.
 
 ![Architecture Diagram](docs/architecture_diagram.png)
